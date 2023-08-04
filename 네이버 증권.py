@@ -17,16 +17,13 @@ def article_Scraping():
 
     while current_date >= end_date:
         formatted_date = current_date.strftime('%Y%m%d')
-        link = f'https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=259&date={formatted_date}'
+        link = f'https://finance.naver.com/news/news_list.naver?mode=LSS3D&section_id=101&section_id2=258&section_id3=401&date={formatted_date}'
 
-        for i in range(1, 11):
+        for i in range(1, 8):
             driver.get(link + f'&page={i}')
             time.sleep(1)
-            # articles = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > dd > a')
-            articles = driver.find_elements(By.CSS_SELECTOR, 'ul.type06_headline > li > dl > dt > a')
+            articles = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > dd > a')
             for article in articles:
-                if article.text == "동영상기사":
-                    pass
                 print(article.text)
                 article_list.append(article.text)
 
@@ -38,3 +35,5 @@ def article_Scraping():
         print(article)
 
 article_Scraping()
+
+#csv로 결과값 추출
