@@ -17,12 +17,11 @@ def article_Scraping():
 
     while current_date >= end_date:
         formatted_date = current_date.strftime('%Y%m%d')
-        link = f'https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=259&date={formatted_date}'
+        link = f'https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=771&date={formatted_date}'
 
         for i in range(1, 3):
             driver.get(link + f'&page={i}')
             time.sleep(1)
-            # articles = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > dd > a')
             articles = driver.find_elements(By.CSS_SELECTOR, 'ul.type06_headline > li > dl > dt > a')
             for article in articles:
                 if article.text == "동영상기사":
@@ -30,6 +29,7 @@ def article_Scraping():
                     continue
                 # print(article.text)
                 article_list.append(article.text)
+
 
         current_date -= timedelta(days=1)
 
